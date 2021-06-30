@@ -73,7 +73,7 @@ let simpleScore = function (word) {
   if (isValidToScore(word)) {
     return word.length;
   } else {
-    cosole.log(`Error: ${word} is not a valid input`)
+    console.log(`Error: ${word} is not a valid input`)
     return 0;
   }
 };
@@ -95,7 +95,7 @@ let vowelBonusScore = function (word) {
     }
     return score;
   } else {    
-      cosole.log(`Error: ${word} is not a valid input`)
+      console.log(`Error: ${word} is not a valid input`)
       return 0;
   }
 };
@@ -116,7 +116,7 @@ let simpleScore = function (word) {
     }
     return score;
   } else {
-    cosole.log(`Error: ${word} is not a valid input`)
+    console.log(`Error: ${word} is not a valid input`)
     return 0;
   }
 };
@@ -139,7 +139,7 @@ let vowelBonusScore = function (word) {
     }
     return score;
   } else {    
-      cosole.log(`Error: ${word} is not a valid input`)
+      console.log(`Error: ${word} is not a valid input`)
       return 0;
   }
 };
@@ -204,6 +204,29 @@ function scorerPrompt(scorers) {
 function transform(oldPointsObject) {  
   let newPointsObject = {};
   // get each key from oldObject which was sorted by point value
+  for (const pointKey in oldPointsObject) {
+    // get the value from oldObjects's key, which will be an array of letters
+    //console.log(`pointKey: ${pointKey}`);
+    let lettersArray = oldPointsObject[pointKey];
+    //console.log(`lettersArray: ${lettersArray}`);
+    // add each letter as a key in the new object
+    for (let i = 0; i < lettersArray.length; i++) {
+      let letter = lettersArray[i].toLowerCase();
+      //console.log(`letter: ${letter}`);
+      newPointsObject[letter] = Number(pointKey);
+    }
+  }
+  //console.log("transform function pre-return check:", typeof newPointsObject);  
+  //console.log(`old structure: ${oldPointsObject}`)
+  //console.log(`new structure: ${newPointsObject}`)
+  return newPointsObject;
+};
+
+
+/*
+function original-transform(oldPointsObject) {  
+  let newPointsObject = {};
+  // get each key from oldObject which was sorted by point value
   for (const pointVal in oldPointsObject) {
     // get the value from oldObjects's key, which will be an array of letters
     let letters = oldPointsObject[pointVal];
@@ -211,12 +234,15 @@ function transform(oldPointsObject) {
     for (let i = 0; i < letters.length; i++) {
       let letter = letters[i].toLowerCase();
       newPointsObject[letter] = Number(pointVal);
-    }    
+    }
   }
+  console.log("transform function pre-return check:", typeof newPointsObject);  
   return newPointsObject;
 };
+*/
 
 let newPointStructure = transform(oldPointStructure);
+console.log("transform function post-return check:", typeof newPointStructure);
 
 function isInStringCaseInsensitive(lookForStr, lookInStr) {
   if (lookInStr.toLowerCase().indexOf(lookForStr.toLowerCase()) >= 0) {
