@@ -211,9 +211,12 @@ function transform(oldPointsObject) {
     //console.log(`lettersArray: ${lettersArray}`);
     // add each letter as a key in the new object
     for (let i = 0; i < lettersArray.length; i++) {
+      
       let letter = lettersArray[i].toLowerCase();
       //console.log(`letter: ${letter}`);
-      newPointsObject[letter] = Number(pointKey);
+      if (letter != " ") {
+        newPointsObject[letter] = Number(pointKey);
+      }      
     }
   }
   //console.log("transform function pre-return check:", typeof newPointsObject);  
@@ -243,6 +246,9 @@ function original-transform(oldPointsObject) {
 
 let newPointStructure = transform(oldPointStructure);
 console.log("transform function post-return check:", typeof newPointStructure);
+console.log(`new object: ${newPointStructure}`);
+console.log(`old object: ${oldPointStructure}`);
+console.log(newPointStructure);
 
 function isInStringCaseInsensitive(lookForStr, lookInStr) {
   if (lookInStr.toLowerCase().indexOf(lookForStr.toLowerCase()) >= 0) {
